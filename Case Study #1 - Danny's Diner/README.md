@@ -166,13 +166,86 @@ GROUP BY s.customer_id;
 ***
 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customers A and B have at the end of January?
 
+```sql
+WITH cte_dates AS (
+    SELECT *,
+           DATE_ADD(join_date, INTERVAL 7 DAY) AS join_week,
+           LAST_DAY('2021-01-31') AS jan_end
+    FROM members
+)
+SELECT
+    s.customer_id,
+    SUM(
+        CASE
+            WHEN m.product_name = 'sushi' OR s.order_date BETWEEN cte.join_date AND cte.join_week THEN m.price * 20
+            ELSE m.price * 10
+        END
+    ) AS points_january
+FROM cte_dates cte
+JOIN sales s ON cte.customer_id = s.customer_id
+JOIN menu m ON m.product_id = s.product_id
+WHERE s.order_date < cte.jan_end
+GROUP BY s.customer_id
+ORDER BY s.customer_id;
+```
+<img width="227" alt="case1 op10" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/38fb2288-0317-4aea-876f-58cd00f83ad0">
+
 ***
 ## Bonus Questions
 Generate some basic datasets so Danny's team can easily inspect the data without needing to use SQL.
 
 **1. Join All The Things:** Generate a table with customer_id, order_date, product_name, price, member (Y/N)
+```sql
+SELECT
+    s.customer_id,
+    s.order_date,
+    menu.product_name,
+    menu.price,
+    CASE
+        WHEN m.join_date  <= s.order_date THEN 'Y'
+        ELSE 'N'
+    END AS member
+FROM sales s
+LEFT JOIN members m ON s.customer_id = m.customer_id
+JOIN menu ON s.product_id = menu.product_id
+ORDER BY
+    s.customer_id,
+    s.order_date,
+    menu.product_name;
+```
+<img width="431" alt="case1 op11" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/c6ea0706-a27b-4379-98c4-0524f184f4f8">
 
 ***
 **2. Rank All The Things:** Danny also requires further information about the ranking of customer products, but he purposely does not need the ranking for non-member purchases. Hence, he expects null ranking values for the records when customers are not yet part of the loyalty program.
+
+```sql
+WITH member_data AS (
+  SELECT
+    s.customer_id,
+    s.order_date,
+    menu.product_name,
+    menu.price,
+    CASE
+        WHEN m.join_date  <= s.order_date THEN 'Y'
+        ELSE 'N'
+    END AS member
+FROM sales s
+LEFT JOIN members m ON s.customer_id = m.customer_id
+JOIN menu ON s.product_id = menu.product_id
+ORDER BY
+    s.customer_id,
+    s.order_date,
+    menu.product_name
+)
+
+SELECT *, 
+  CASE
+    WHEN member = 'N' then NULL
+    ELSE RANK () OVER (
+      PARTITION BY customer_id, member ORDER BY order_date) END AS ranking
+FROM member_data;
+```
+<img width="496" alt="case1 op12" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/5fd6d520-7990-4838-852c-1420e01171c0">
+
 ***
 Let's connect on [LinkedIn!](https://www.linkedin.com/in/khushi-sabarad/)🤝
