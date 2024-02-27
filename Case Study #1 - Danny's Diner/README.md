@@ -9,7 +9,7 @@ Danny seriously loves Japanese food so in the beginning of 2021, he decides to e
 ## Problem Statement
 Danny wants to use the data to answer a few simple questions about his customers, especially about their visiting patterns, how much money they’ve spent and also which menu items are their favourite. This deeper connection with his customers will help him deliver a better and more personalised experience for his loyal customers. 
 
-**ERD(Entity Relationship Diagram) of the 3 datasets Danny shared:** 
+**`ERD(Entity Relationship Diagram)` of the 3 datasets Danny shared:** 
 
 <img width="500" alt="case1 ERD" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/9b767443-f50d-4752-ab57-39b44ccb022a">
 
@@ -34,6 +34,12 @@ GROUP BY s.customer_id;
 
 <img width="300" alt="case1 op1" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/ca75db5c-99b6-4aef-ae86-778cbf90f858">
 
+The total amount spent at the restaurant by:
+  - Customer A is $76
+  - Customer B is $74
+  - Customer C is $36
+
+    
 ***
 
 2. How many days has each customer visited the restaurant?
@@ -45,6 +51,11 @@ GROUP BY customer_id;
 - `COUNT`(DISTINCT order_date): This function calculates the total number of unique days each customer visited the diner. By using `DISTINCT`, it ensures that if a customer visits the diner multiple times on the same day, it counts as one visit for that day instead of being counted multiple times.
 
 <img width="300" alt="case1 op2" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/f992621d-2890-410b-ba69-7e691c623df4">
+
+Number of days visited by:
+  - Customer A is 4
+  - Customer B is 6
+  - Customer C is 2
 
 ***
 
@@ -75,6 +86,11 @@ Note: As the dataset lacks specific DateTime information, I am assuming that the
 
 <img width="250" alt="case1 op3" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/730d7dd5-02d1-4a3d-af83-7636e5bd1a85">
 
+The first item, from the menu, purchased by:
+  - Customer A was Sushi
+  - Customer B was Curry
+  - Customer C was Ramen
+
 ***
 
 4. What is the most purchased item on the menu and how many times did all customers purchase it?
@@ -93,6 +109,8 @@ LIMIT 1;
 - I ordered the results in descending order to prioritize the most purchased item and then applied LIMIT 1 to display only the top row.
    
 <img width="430" alt="case1 op4" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/f23fffc3-2878-4c96-89f3-6b38270c48d3">
+
+The most purchased item is Ramen, bought 8 out of 15 times.
 
 ***
 
@@ -117,6 +135,10 @@ GROUP BY customer_id, max_purchase_count;
 
 <img width="400" alt="case1 op5" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/3c0797c9-4536-4986-a47a-48cc489d014c">
 
+I am assuming that the customer's most popular item would be the one they ordered the most. 
+  - The most popular item is Ramen, which was bought three times each by both Customer A and C.
+  - Customer B bought all three items twice, indicating either a lack of specific preference or an equal liking for all items
+
 ***
 
 6. Which item was purchased first by the customer after they became a member?
@@ -124,8 +146,7 @@ GROUP BY customer_id, max_purchase_count;
 SELECT s.customer_id,
     mem.join_date,
     s.order_date,
-    m.product_name,
-    m.price
+    m.product_name
 FROM  sales s
 JOIN menu m ON s.product_id = m.product_id
 JOIN members mem ON mem.customer_id = s.customer_id
@@ -137,16 +158,19 @@ WHERE s.order_date = (
 ORDER BY s.customer_id;
 
 ```
-<img width="450" alt="case1 op6" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/f1b6d9b8-82c2-4d82-9415-a71d7e07d51c">
+<img width="450" alt="casestudy1 op6" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/2484f9a5-6ddd-4df7-b89a-5bf3f5b8579c">
 
+Customers A & B took membership in the diner in January 2021.
+After they became members, the first item bought by:
+  - Customer A was Ramen
+  - Customer B was Sushi
 ***
 7. Which item was purchased just before the customer became a member?
 ```sql
 SELECT s.customer_id,
     mem.join_date,
     s.order_date,
-    m.product_name,
-    m.price
+    m.product_name
 FROM  sales s
 JOIN menu m ON s.product_id = m.product_id
 JOIN members mem ON mem.customer_id = s.customer_id
@@ -158,8 +182,12 @@ WHERE s.order_date = (
 ORDER BY s.customer_id;
 ```
 
-<img width="430" alt="case1 op7" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/41dbf23f-f1c7-4b49-9d8f-9c59e1434eff">
+<img width="430" alt="case1 op7" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/2bc3d0d9-a041-456f-8494-6f63c480764c">\
 
+Just before becoming members:
+  - Customer A bought Curry
+  - Customer B bought Sushi
+  
 ***
 8. What are the total items and amount spent for each member before they became a member?
 ```sql
@@ -177,12 +205,16 @@ ORDER BY s.customer_id;
 ```
 <img width="400" alt="case1 op8" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/0dca2be2-7069-4e76-816a-cce3075226ad">
 
+Before they became members:
+  - Customer A bought 2 items, curry & sushi, spending $25
+  - Customer B bought 3 items, curry twice & sushi, spending $40
+
 ***
 9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
 
 ```sql
 SELECT s.customer_id,
-        SUM (IF(m.product_name = 'sushi', (menu.price * 2) * 10, menu.price * 10)) AS total_points
+        SUM(IF(m.product_name = 'sushi', (m.price * 2) * 10, m.price * 10)) AS total_points
 FROM sales s
 JOIN menu m ON s.product_id = m.product_id
 GROUP BY s.customer_id;
@@ -192,6 +224,9 @@ GROUP BY s.customer_id;
   
 <img width="300" alt="case1 op9" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/53de75e5-ce94-4880-9829-991dd0ac0784">
 
+  - Customer A has 860 points
+  - Customer B has 940 points
+  - Customer C has 360 points
 
 ***
 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customers A and B have at the end of January?
@@ -226,6 +261,10 @@ ORDER BY s.customer_id;
   
 
 <img width="300" alt="case1 op10" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/38fb2288-0317-4aea-876f-58cd00f83ad0">
+
+Assuming the points are not spent, by the end of January:
+  - Customer A has 1370 points
+  - Customer B has 940 points
 
 ***
 ## Bonus Questions
