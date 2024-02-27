@@ -113,8 +113,7 @@ GROUP BY customer_id, max_purchase_count;
 SELECT s.customer_id,
     mem.join_date,
     s.order_date,
-    m.product_name,
-    m.price
+    m.product_name
 FROM  sales s
 JOIN menu m ON s.product_id = m.product_id
 JOIN members mem ON mem.customer_id = s.customer_id
@@ -131,8 +130,7 @@ ORDER BY s.customer_id;
 SELECT s.customer_id,
     mem.join_date,
     s.order_date,
-    m.product_name,
-    m.price
+    m.product_name
 FROM  sales s
 JOIN menu m ON s.product_id = m.product_id
 JOIN members mem ON mem.customer_id = s.customer_id
@@ -162,7 +160,7 @@ ORDER BY s.customer_id;
 --9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
 
 SELECT s.customer_id,
-        SUM (IF(m.product_name = 'sushi', (menu.price * 2) * 10, menu.price * 10)) AS total_points
+        SUM(IF(m.product_name = 'sushi', (m.price * 2) * 10, m.price * 10)) AS total_points
 FROM sales s
 JOIN menu m ON s.product_id = m.product_id
 GROUP BY s.customer_id;
@@ -190,7 +188,6 @@ JOIN menu m ON m.product_id = s.product_id
 WHERE s.order_date < cte.jan_end
 GROUP BY s.customer_id
 ORDER BY s.customer_id;
-
 
 --------------------------------------------
 --Bonus Questions
