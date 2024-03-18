@@ -1,5 +1,5 @@
 # Case Study #2 - Pizza Runner 🍕
-<img src="https://8weeksqlchallenge.com/images/case-study-designs/1.png" alt="Image" width="400" height="410">
+<img src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/58f42b34-d2da-45bc-a983-b804f8f5ec52" alt="Image" width="500" height="480">
 
  ***
 
@@ -13,9 +13,9 @@ Because Danny had a few years of experience as a data scientist - he was very aw
 He has prepared for us an entity relationship diagram of his database design but requires further assistance to clean his data and apply some basic calculations so he can better direct his runners and optimise Pizza Runner’s operations.
 All datasets exist within the pizza_runner database schema.
 
-**`ERD(Entity Relationship Diagram)` of the 3 datasets Danny shared:** 
+**`ERD(Entity Relationship Diagram)`** :
 
-<img width="500" alt="case1 ERD" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/9b767443-f50d-4752-ab57-39b44ccb022a">
+<img width="600" alt="case2 ERD" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/6e2fc491-9598-4386-8843-af04b8333162">
 
 [Click here](https://8weeksqlchallenge.com/case-study-2/) to learn more about the case study in detail.
 
