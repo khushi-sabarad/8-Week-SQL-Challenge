@@ -111,10 +111,11 @@ ORDER BY order_hour;
 
 10. What was the volume of orders for each day of the week?
 ```sql
-SELECT DATE(order_time) AS order_date, COUNT(*)
+SELECT DAYNAME(order_time) AS day,
+        COUNT(*) AS total_pizzas_ordered
 FROM customer_orders
-GROUP BY order_date;
+GROUP BY day;
 ```
-![image](https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/e5c54c04-255e-433f-a094-c85ac964ca07)
+![image](https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/da48ae95-2b83-437f-a517-20c198f92e54)
 
 ***
