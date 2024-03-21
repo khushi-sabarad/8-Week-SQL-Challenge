@@ -85,15 +85,15 @@ describe runner_orders;
 ***
 Case Study Questions are broken up by area of focus including:
 
-A. [Pizza Metrics](https://github.com/khushi-sabarad/8-Week-SQL-Challenge/blob/main/Case%20Study%20%232%20-%20Pizza%20Runner/pizza_metrics.md)
+A. [Pizza Metrics](https://github.com/khushi-sabarad/8-Week-SQL-Challenge/blob/main/Case%20Study%20%232%20-%20Pizza%20Runner/A.PizzaMetrics.md)
 
-B. Runner and Customer Experience
+B. [Runner and Customer Experience](https://github.com/khushi-sabarad/8-Week-SQL-Challenge/blob/main/Case%20Study%20%232%20-%20Pizza%20Runner/B.RunnerAndCustomerExperience.md)
 
-C. Ingredient Optimisation
+C. [Ingredient Optimisation](https://github.com/khushi-sabarad/8-Week-SQL-Challenge/blob/main/Case%20Study%20%232%20-%20Pizza%20Runner/C.IngredientOptimisation.md)
 
-D. Pricing and Ratings
+D. [Pricing and Ratings](https://github.com/khushi-sabarad/8-Week-SQL-Challenge/blob/main/Case%20Study%20%232%20-%20Pizza%20Runner/D.PricingAndRatings.md)
 
-E. Bonus DML Challenges (DML = Data Manipulation Language)
+E. [Bonus DML Challenges (DML = Data Manipulation Language)](https://github.com/khushi-sabarad/8-Week-SQL-Challenge/blob/main/Case%20Study%20%232%20-%20Pizza%20Runner/E.BonusQuestions.md)
 
 ***
 Let's connect on [LinkedIn!](https://www.linkedin.com/in/khushi-sabarad/)🤝
