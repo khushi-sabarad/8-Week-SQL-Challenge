@@ -85,7 +85,7 @@ describe runner_orders;
 ***
 Case Study Questions are broken up by area of focus including:
 
-A. [Pizza Metrics](https://github.com/khushi-sabarad/8-Week-SQL-Challenge/blob/main/Case%20Study%20%232%20-%20Pizza%20Runner/A.%20Pizza%20Metrics/readme.md)
+A. [Pizza Metrics](https://github.com/khushi-sabarad/8-Week-SQL-Challenge/blob/main/Case%20Study%20%232%20-%20Pizza%20Runner/pizza_metrics.md)
 
 B. Runner and Customer Experience
 
