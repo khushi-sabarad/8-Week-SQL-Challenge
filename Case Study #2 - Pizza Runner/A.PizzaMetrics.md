@@ -8,7 +8,7 @@ SELECT COUNT(*) FROM customer_orders;
 ![image](https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/ebb06d8b-9659-4194-ba89-d46164ab065d)
 
 ***
-2. --How many unique customer orders were made?
+2. How many unique customer orders were made?
 ```sql
 SELECT COUNT(DISTINCT(order_id))
 FROM customer_orders;
