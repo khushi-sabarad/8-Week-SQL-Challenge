@@ -11,7 +11,7 @@ Danny wants to use the data to answer a few simple questions about his customers
 
 **`ERD(Entity Relationship Diagram)` of the 3 datasets Danny shared:** 
 
-<img width="500" alt="case1 ERD" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/9b767443-f50d-4752-ab57-39b44ccb022a">
+<img width="500" alt="case1 ERD" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/3ae86d1c-6be2-497f-8334-f6e9a1328b4e">
 
 [Click here](https://8weeksqlchallenge.com/case-study-1/) to learn more about the case study in detail.
 
@@ -32,7 +32,6 @@ GROUP BY s.customer_id;
 -  `JOINS`: The default join in SQL is an `INNER JOIN`, which retrieves records that have matching values in both tables being joined based on a specific condition.
 -  `GROUP BY` groups rows that have the same values, in this case, grouping by customer_id.
 
-<img width="300" alt="case1 op1" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/ca75db5c-99b6-4aef-ae86-778cbf90f858">
 
 The total amount spent at the restaurant by:
   - Customer A is $76
@@ -49,8 +48,6 @@ FROM sales
 GROUP BY customer_id;
 ```
 - `COUNT`(DISTINCT order_date): This function calculates the total number of unique days each customer visited the diner. By using `DISTINCT`, it ensures that if a customer visits the diner multiple times on the same day, it counts as one visit for that day instead of being counted multiple times.
-
-<img width="300" alt="case1 op2" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/f992621d-2890-410b-ba69-7e691c623df4">
 
 Number of days visited by:
   - Customer A is 4
@@ -84,8 +81,6 @@ Selects the customer ID and an alias representing the first purchased item for e
   
 Note: As the dataset lacks specific DateTime information, I am assuming that the first item ordered corresponds to the entry in the first row of the dataset. Here, Customer A placed orders for both curry and sushi on day 1, each order is counted as a separate visit, and the item listed first in the order is considered the first ordered item.
 
-<img width="250" alt="case1 op3" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/730d7dd5-02d1-4a3d-af83-7636e5bd1a85">
-
 The first item, from the menu, purchased by:
   - Customer A was Sushi
   - Customer B was Curry
@@ -107,8 +102,6 @@ LIMIT 1;
 - `COUNT(*)` returns the number of rows. Each row represents a purchase.
 - to get a deeper understanding, I used `CONCAT` to concatenate the purchase_count with the total number of purchases in the sales table, displaying it as a fraction.
 - I ordered the results in descending order to prioritize the most purchased item and then applied LIMIT 1 to display only the top row.
-   
-<img width="430" alt="case1 op4" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/f23fffc3-2878-4c96-89f3-6b38270c48d3">
 
 The most purchased item is Ramen, bought 8 out of 15 times.
 
@@ -131,9 +124,6 @@ WHERE purchase_count=max_purchase_count
 GROUP BY customer_id, max_purchase_count;
 ```
 - `GROUP_CONCAT()` combines the most popular items purchased by each customer into a single string. Here, Customer B has ordered all three items twice. Instead of having three separate rows for one customer, I've utilized GROUP_CONCAT() to condense the information. It's important to note that using GROUP_CONCAT() in database storage may violate `database normalization` rules. However, for presentation purposes, it enables us to display the data in a single, more readable row.
-
-
-<img width="400" alt="case1 op5" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/3c0797c9-4536-4986-a47a-48cc489d014c">
 
 I am assuming that the customer's most popular item would be the one they ordered the most. 
   - The most popular item is Ramen, which was bought three times each by both Customer A and C.
@@ -158,8 +148,6 @@ WHERE s.order_date = (
 ORDER BY s.customer_id;
 
 ```
-<img width="450" alt="casestudy1 op6" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/2484f9a5-6ddd-4df7-b89a-5bf3f5b8579c">
-
 Customers A & B took membership in the diner in January 2021.
 After they became members, the first item bought by:
   - Customer A was Ramen
@@ -182,8 +170,6 @@ WHERE s.order_date = (
 ORDER BY s.customer_id;
 ```
 
-<img width="430" alt="case1 op7" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/2bc3d0d9-a041-456f-8494-6f63c480764c">\
-
 Just before becoming members:
   - Customer A bought Curry
   - Customer B bought Sushi
@@ -203,7 +189,6 @@ WHERE s.order_date < m.join_date
 GROUP BY s.customer_id
 ORDER BY s.customer_id;
 ```
-<img width="400" alt="case1 op8" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/0dca2be2-7069-4e76-816a-cce3075226ad">
 
 Before they became members:
   - Customer A bought 2 items, curry & sushi, spending $25
@@ -221,8 +206,6 @@ GROUP BY s.customer_id;
 ```
 
 - `IF()` checks if the product name is sushi, if it is, it multiplies the price by 20 (since each $1 spent = 10 points, and sushi has a 2x points multiplier); if it's not sushi, it multiplies the price by 10.
-  
-<img width="300" alt="case1 op9" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/53de75e5-ce94-4880-9829-991dd0ac0784">
 
   - Customer A has 860 points
   - Customer B has 940 points
@@ -260,8 +243,6 @@ ORDER BY s.customer_id;
     - If the product_name is 'sushi' `OR` the order date is within the first week after joining, it multiplies the price by 20. Otherwise, it multiplies the price by 10.
   
 
-<img width="300" alt="case1 op10" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/38fb2288-0317-4aea-876f-58cd00f83ad0">
-
 Assuming the points are not spent, by the end of January:
   - Customer A has 1370 points
   - Customer B has 940 points
@@ -290,8 +271,6 @@ ORDER BY
     menu.product_name;
 ```
 - `LEFT JOIN` ensures that all records from the sales table (the left table in the join) are included in the result set, regardless of whether there is a matching record in the "members" table (the right table in the join). If there is no matching record in the members table, the result set will include all records from the sales table and the corresponding columns from the "members" table will be NULL.
-  
-<img width="400" alt="case1 op11" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/c6ea0706-a27b-4379-98c4-0524f184f4f8">
 
 ***
 **2. Rank All The Things:** Danny also requires further information about the ranking of customer products, but he purposely does not need the ranking for non-member purchases. Hence, he expects null ranking values for the records when customers are not yet part of the loyalty program.
@@ -328,8 +307,6 @@ FROM member_data;
     - The RANK() function assigns a rank to each row based on its position within a partition, which is defined by the `PARTITION BY` clause. Within each partition, rows are ordered by the `ORDER BY` clause. Ties in ranking result in the same rank for affected rows, with the next row receiving the next sequential rank.
 
 - If the "member" column is 'N', indicating that the customer was not a member at the time of the order, we assign NULL to the ranking column.
-
-<img width="500" alt="case1 op12" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/5fd6d520-7990-4838-852c-1420e01171c0">
 
 ***
 Let's connect on [LinkedIn!](https://www.linkedin.com/in/khushi-sabarad/)🤝
