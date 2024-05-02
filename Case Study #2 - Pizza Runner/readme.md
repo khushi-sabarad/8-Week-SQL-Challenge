@@ -1,5 +1,5 @@
 # Case Study #2 - Pizza Runner 🍕
-<img src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/58f42b34-d2da-45bc-a983-b804f8f5ec52" alt="Image" width="500" height="480">
+<img src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/dc2eb556-ac0c-49a7-8e2b-57853348ba41" alt="Image" width="500" height="480">
 
  ***
 
@@ -15,7 +15,7 @@ All datasets exist within the pizza_runner database schema.
 
 **`ERD(Entity Relationship Diagram)`** :
 
-<img width="600" alt="case2 ERD" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/6e2fc491-9598-4386-8843-af04b8333162">
+<img width="600" alt="case2 ERD" src="https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/7fc39133-f4b2-4eb0-b524-26c160dd03be">
 
 [Click here](https://8weeksqlchallenge.com/case-study-2/) to learn more about the case study in detail.
 
@@ -24,8 +24,6 @@ All datasets exist within the pizza_runner database schema.
 
 ## Data Cleaning
 Table: customer_orders
-
-![image](https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/b7e24354-7942-4385-a778-c83fff2c34d7)
 
 We have to clean the 'exclusions' and the 'extras' columns.
 
@@ -39,49 +37,34 @@ UPDATE customer_orders
 SET exclusions = NULL, extras = NULL
 WHERE exclusions = '' OR exclusions = 'null' OR extras = '' OR extras = 'null';
 ```
-![image](https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/f2b12a7a-23eb-4b72-a411-39072bc8dfe1)
 
 ***
 Table: runner_orders
 
-![image](https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/3d5cc7ac-141f-485c-adce-3900d10bee5d)
-
-1. Check the null/empty values
 ```sql
+-- 1. Check the null/empty values
 UPDATE runner_orders
 SET pickup_time = NULLIF(pickup_time, 'null'),
     distance = NULLIF(distance, 'null'),
     duration = NULLIF(duration, 'null'),
     cancellation = NULLIF(NULLIF(NULLIF(cancellation, ''), 'NaN'), 'null');
 
-```
-![image](https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/f9432dd2-1449-4249-a2f1-55884849d41e)
-
-
-2. Remove alphabets from duration and distance columns using REGEXP_REPLACE
-
-```sql
+-- 2. Remove alphabets from duration and distance columns using REGEXP_REPLACE
 UPDATE runner_orders
 SET duration = REGEXP_REPLACE(duration, '[^0-9.]', ''),
     distance = REGEXP_REPLACE(distance, '[^0-9.]', '');
-```
-3. Rename columns (add the units) and change data types
-```sql
+
+-- 3. Rename columns (add the units) and change data types
 ALTER TABLE runner_orders
 CHANGE COLUMN duration duration_mins FLOAT,
 CHANGE COLUMN distance distance_km FLOAT;
-```
-![image](https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/01b9acb1-0488-4c7a-aa0b-b8f2bf583b7a)
 
-4. Change the datatype of the pickup_time column to TIMESTAMP
-```sql
+-- 4. Change the data type of the pickup_time column to TIMESTAMP
 ALTER TABLE runner_orders
 MODIFY COLUMN pickup_time TIMESTAMP;
 
 describe runner_orders;
 ```
-![image](https://github.com/khushi-sabarad/8-Week-SQL-Challenge/assets/71957748/2800362c-0908-4109-a398-d0b5f60b20d4)
-
 ***
 Case Study Questions are broken up by area of focus including:
 
