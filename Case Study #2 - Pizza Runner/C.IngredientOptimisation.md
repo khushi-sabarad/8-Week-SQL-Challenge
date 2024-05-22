@@ -4,16 +4,33 @@
 
 What are the standard ingredients for each pizza?
 ```sql
-
+SELECT
+	pr.pizza_id,
+	pn.pizza_name,
+	pr.toppings
+FROM
+	pizza_recipes pr
+JOIN pizza_names pn ON pr.pizza_id = pn.pizza_id;
 ```
+| pizza_id | pizza_name   | toppings                | 
+| -------- | ------------ |------------------------ |
+| 1        | Meatlovers   | 1, 2, 3, 4, 5, 6, 8, 10 |
+| 2        | Vegetarian   | 4, 6, 7, 9, 11, 12      |
 
 ***
 
 What was the most commonly added extra?
 ```sql
-
+SELECT extras,
+    COUNT(extras) AS count_extras
+FROM customer_orders
+WHERE extras LIKE '%'
+GROUP BY extras;
 ```
-
+| extras | count_extras   |
+| ------ | -------------- |
+| 1, 5   | 1              |
+| 1, 4   | 1              |
 ***
 
 What was the most common exclusion?
